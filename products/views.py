@@ -16,6 +16,7 @@ class CreateProductView(LoginRequiredMixin, CreateView):
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
     redirect_field_name = 'products/product_detail.html'
+    template_name_suffix = '_update_form'
     form_class = ProductForm
     model = Product
     
