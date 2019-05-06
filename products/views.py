@@ -19,7 +19,6 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     template_name_suffix = '_update_form'
     form_class = ProductForm
     model = Product
-    
 
 
 

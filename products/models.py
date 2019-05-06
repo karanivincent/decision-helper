@@ -6,6 +6,9 @@ from django.urls import reverse
 import misaka
 
 class Product(models.Model):
+    #VSCode will see the objects declared
+    objects = models.Manager()
+
     name = models.CharField(max_length=255, unique=True)
     price = models.PositiveIntegerField()	
     quantity = models.PositiveIntegerField()
