@@ -33,8 +33,8 @@
           {% if user.is_authenticated %}
             <a class="nav-item nav-link" href="{% url 'accounts:logout' %}" class="btn btn-simple"><i class="fas fa-sign-out-alt"></i> Log out</a>
           {% else %}
-            <a class="nav-item nav-link" href="{% url 'accounts:login' %}" class="btn btn-simple"><i class="fas fa-user"></i> Log in</a>
-            <a class="nav-item nav-link" href="{% url 'accounts:signup' %}" class="btn btn-simple"><i class="fas fa-user-plus"></i> Sign up</a>
+            <a class="nav-item nav-link" href="{% url 'accounts:login' %}?next={{request.path}}" class="btn btn-simple"><i class="fas fa-user"></i> Log in</a>
+            <a class="nav-item nav-link" href="{% url 'accounts:signup' %}?next={{request.path}}" class="btn btn-simple"><i class="fas fa-user-plus"></i> Sign up</a>
           {% endif %}
         </div>
       </div>
