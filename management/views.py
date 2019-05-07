@@ -23,10 +23,12 @@ class DepartmentsUpdateView(LoginRequiredMixin, UpdateView):
     model = Departments
     login_url = '/login/'
     form_class = DepartmentsForm
+    template_name_suffix = '_update_form'
+
 
 class DepartmentsDeleteView(LoginRequiredMixin, DeleteView):
     model = Departments
-    success_url = reverse_lazy('departments_list')
+    success_url = reverse_lazy('management:departments_list')
 
 class DepartmentsListView(ListView):
     model = Departments
@@ -46,7 +48,7 @@ class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
 
 class EmployeeDeleteView(LoginRequiredMixin, DeleteView):
     model = Employee
-    success_url = reverse_lazy('employee_list')
+    success_url = reverse_lazy('management:employee_list')
 
 class EmployeeListView(LoginRequiredMixin, ListView):
     model = Employee

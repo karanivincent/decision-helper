@@ -27,17 +27,28 @@ class Employee(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("management:departments_detail", kwargs={"pk": self.pk})
+        return reverse("management:employee_detail", kwargs={"pk": self.pk})
+    
+    def fullname(self):
+        return self.first_name + ' ' + self.last_name
     
 
 class Departments(models.Model):
-    dept_no = models.CharField(primary_key=True, max_length=4)
+    dept_no = models.AutoField(primary_key=True, null=False)
     dept_name = models.CharField(unique=True, max_length=40)
-
+ 
     class Meta:
         db_table = 'departments'
 
+    def __str__(self):
+        return self.dept_name
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('management:departments_detail', kwargs={'pk': self.pk})
+    
 class DeptEmp(models.Model):
     emp_no = models.ForeignKey(Employee, on_delete=models.DO_NOTHING, db_column='emp_no')
     dept_no = models.ForeignKey(Departments, on_delete=models.DO_NOTHING, db_column='dept_no')
