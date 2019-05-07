@@ -16,7 +16,7 @@ class DepartmentsCreateView(LoginRequiredMixin, CreateView):
     # redirect_field_name = 'management/department_detail.html'
     form_class = DepartmentsForm
 
-class DepartmentsDetailView(DetailView):
+class DepartmentsDetailView(LoginRequiredMixin, DetailView):
     model = Departments
 
 class DepartmentsUpdateView(LoginRequiredMixin, UpdateView):
@@ -27,3 +27,28 @@ class DepartmentsUpdateView(LoginRequiredMixin, UpdateView):
 class DepartmentsDeleteView(LoginRequiredMixin, DeleteView):
     model = Departments
     success_url = reverse_lazy('departments_list')
+
+class DepartmentsListView(ListView):
+    model = Departments
+
+##############################################################################
+
+class EmployeeCreateView(LoginRequiredMixin, CreateView):
+    model = Employee
+    form_class = EmployeeForm
+
+class EmployeeDetailView(LoginRequiredMixin, DetailView):
+    model = Employee
+
+class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
+    model = Employee
+    form_class = EmployeeForm
+
+class EmployeeDeleteView(LoginRequiredMixin, DeleteView):
+    model = Employee
+    success_url = reverse_lazy('employee_list')
+
+class EmployeeListView(LoginRequiredMixin, ListView):
+    model = Employee
+
+#######################################################################################

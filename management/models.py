@@ -1,7 +1,8 @@
 from django.db import models
+from django.urls import reverse
+
 
 # Create your models here.
-
 class Employee(models.Model):
     GENDER_CHOICES = (
         ('M', 'Male'),
@@ -15,13 +16,19 @@ class Employee(models.Model):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     hire_date = models.DateField()
 
-    def __str__(self):
-        return 'first_name=%s, last_name=%s' % (self.first_name, self.last_name)
-
     class Meta:
         db_table = 'employees'
         ordering = ['hire_date']
 
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("management:departments_detail", kwargs={"pk": self.pk})
+    
 
 class Departments(models.Model):
     dept_no = models.CharField(primary_key=True, max_length=4)
