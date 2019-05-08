@@ -74,6 +74,7 @@ class DeptManager(models.Model):
 class Salaries(models.Model):
     emp_no = models.ForeignKey(Employee, on_delete=models.DO_NOTHING, db_column='emp_no')
     salary = models.IntegerField()
+    advance = models.IntegerField(null=True)
     from_date = models.DateField()
     to_date = models.DateField()
 
