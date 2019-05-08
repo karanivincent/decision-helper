@@ -9,7 +9,7 @@ class Employee(models.Model):
         ('F', 'Female'),
     )
 
-    emp_no = models.IntegerField(primary_key=True)
+    emp_no = models.AutoField(primary_key=True, null=False)
     birth_date = models.DateField()
     first_name = models.CharField(max_length=14)
     last_name = models.CharField(max_length=16)

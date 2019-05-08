@@ -45,6 +45,8 @@ class EmployeeDetailView(LoginRequiredMixin, DetailView):
 class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
     model = Employee
     form_class = EmployeeForm
+    template_name_suffix = '_update_form'
+
 
 class EmployeeDeleteView(LoginRequiredMixin, DeleteView):
     model = Employee
