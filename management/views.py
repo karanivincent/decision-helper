@@ -65,6 +65,7 @@ class SalariesCreateView(LoginRequiredMixin, CreateView):
 
 class SalariesDetailView(LoginRequiredMixin, DetailView):
     model = Salaries
+    employee = Employee.objects.prefetch_related('salary')
 
 class SalariesUpdateView(LoginRequiredMixin, UpdateView):
     model = Salaries

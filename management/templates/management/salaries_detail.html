@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3> This is the depart of: {{departments.dept_name}} </h3>
-
-
+<h3> <a href="{% url 'management:employee_detail' pk=salaries. %}"> {{employee.name}} Salary</a> </h3>
+<p>Amount : {{salaries.amount}}</p>
+<p> Advance : {{salaries.advance}}</p>
+<p> From : {{salaries.from_date}} to: {{salaries.to_date}}
 {% if user.is_authenticated %}
   <a class='btn btn-secondary' href="{% url 'management:departments_update' pk=departments.pk %}">
     <span class='fas fa-pen'></span>

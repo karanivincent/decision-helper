@@ -31,6 +31,9 @@ class Employee(models.Model):
     
     def fullname(self):
         return self.first_name + ' ' + self.last_name
+
+    #VSCode will see the objects declared
+    objects = models.Manager()
     
 
 class Departments(models.Model):
@@ -48,6 +51,9 @@ class Departments(models.Model):
 
     def get_absolute_url(self):
         return reverse('management:departments_detail', kwargs={'pk': self.pk})
+
+    #VSCode will see the objects declared
+    objects = models.Manager()
     
 class DeptEmp(models.Model):
     emp_no = models.ForeignKey(Employee, on_delete=models.DO_NOTHING, db_column='emp_no')
@@ -59,6 +65,9 @@ class DeptEmp(models.Model):
         db_table = 'dept_emp'
         unique_together = (('emp_no', 'dept_no'),)
 
+    #VSCode will see the objects declared
+    objects = models.Manager()
+
 
 class DeptManager(models.Model):
     dept_no = models.ForeignKey(Departments, on_delete=models.DO_NOTHING, db_column='dept_no')
@@ -69,12 +78,15 @@ class DeptManager(models.Model):
     class Meta:
         db_table = 'dept_manager'
         unique_together = (('emp_no', 'dept_no'),)
+
+    #VSCode will see the objects declared
+    objects = models.Manager()
         
 
 class Salaries(models.Model):
-    emp_no = models.ForeignKey(Employee, on_delete=models.DO_NOTHING, db_column='emp_no')
-    salary = models.IntegerField()
-    advance = models.IntegerField(null=True)
+    emp_no = models.ForeignKey(Employee, related_name='salary', on_delete=models.DO_NOTHING, db_column='emp_no')
+    amount = models.PositiveIntegerField(null=True)
+    advance = models.PositiveIntegerField(null=True)
     from_date = models.DateField()
     to_date = models.DateField()
 
@@ -82,12 +94,18 @@ class Salaries(models.Model):
         db_table = 'salaries'
         unique_together = (('emp_no', 'from_date'),)
 
+    #VSCode will see the objects declared
+    objects = models.Manager()
+
 
 class Titles(models.Model):
-    emp_no = models.ForeignKey(Employee, on_delete=models.DO_NOTHING, db_column='emp_no')
+    emp_no = models.ForeignKey(Employee, related_name='title', on_delete=models.DO_NOTHING, db_column='emp_no')
     title = models.CharField(max_length=50)
     from_date = models.DateField()
     to_date = models.DateField(blank=True, null=True)
 
     class Meta:
         db_table = 'titles'
+
+    #VSCode will see the objects declared
+    objects = models.Manager()
