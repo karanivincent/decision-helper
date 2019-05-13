@@ -94,6 +94,15 @@ class Salaries(models.Model):
         db_table = 'salaries'
         unique_together = (('emp_no', 'from_date'),)
 
+    def __str__(self):
+        return str(self.emp_no) +"'s salary from " +  str(self.from_date) + ' to '+ str(self.to_date)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('management:salaries_detail', kwargs={'pk': self.pk})
+
     #VSCode will see the objects declared
     objects = models.Manager()
 
@@ -106,6 +115,12 @@ class Titles(models.Model):
 
     class Meta:
         db_table = 'titles'
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('management:titles_detail', kwargs={'pk': self.pk})
 
     #VSCode will see the objects declared
     objects = models.Manager()
