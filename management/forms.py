@@ -1,5 +1,7 @@
 from django import forms
-from management.models import Titles, Departments, Employee, Salaries
+from management.models import (Titles, Departments,
+                             Employee, Salaries,
+                             DeptEmployee, DeptManager)
 from bootstrap_datepicker_plus import DatePickerInput
 from bootstrap4_datetime.widgets    import DateTimePicker
 
@@ -33,6 +35,27 @@ class TitlesForm(forms.ModelForm):
 
     class Meta():
         model = Titles
+        fields = '__all__'
+        widgets = {
+            'from_date':forms.DateInput(attrs={'type': 'date'}),
+            'to_date': forms.DateInput(attrs={'type': 'date'})
+        }
+
+class DeptEmployeeForm(forms.ModelForm):
+
+    class Meta():
+        model = DeptEmployee
+        fields = '__all__'
+        widgets = {
+            'from_date':forms.DateInput(attrs={'type': 'date'}),
+            'to_date': forms.DateInput(attrs={'type': 'date'})
+        }
+
+
+class DeptManagerForm(forms.ModelForm):
+    
+    class Meta():
+        model = DeptManager
         fields = '__all__'
         widgets = {
             'from_date':forms.DateInput(attrs={'type': 'date'}),

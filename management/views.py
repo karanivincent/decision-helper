@@ -1,16 +1,21 @@
 from django.shortcuts import render
 from management.models import (Departments, Employee,
-                            Salaries, Titles)
+                                Salaries, Titles,
+                                DeptEmployee, DeptManager)
 from django.views.generic import (CreateView, DetailView,
-                                 UpdateView, DeleteView,
-                                  ListView )
+                                    UpdateView, DeleteView,
+                                    ListView )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from management.forms import (DepartmentsForm, EmployeeForm,
-                             SalariesForm, TitlesForm)
+                                SalariesForm, TitlesForm,
+                                DeptEmployeeForm, DeptManagerForm)
 from django.urls import reverse_lazy
 
 
 # Create your views here.
+###################################################################################
+
+#Department Views
 
 class DepartmentsCreateView(LoginRequiredMixin, CreateView):
     model = Departments
@@ -35,8 +40,50 @@ class DepartmentsDeleteView(LoginRequiredMixin, DeleteView):
 class DepartmentsListView(ListView):
     model = Departments
 
-##############################################################################
+#DeptManager views 
 
+class DeptManagerCreateView(LoginRequiredMixin, CreateView):
+    model = DeptManager
+    form_class = DeptManagerForm
+
+class DeptManagerDetailView(LoginRequiredMixin, DetailView):
+    model = DeptManager
+
+class DeptManagerUpdateView(LoginRequiredMixin, UpdateView):
+    model = DeptManager
+    form_class = DeptManagerForm
+    template_name_suffix = '_update_form'
+
+class DeptManagerDeleteView(LoginRequiredMixin, DeleteView):
+    model = DeptManager
+    success_url = reverse_lazy('management: deptmanager_list')
+
+class DeptManagerListView(LoginRequiredMixin, ListView):
+    model = DeptManager
+
+#DeptEmployee views
+
+class DeptEmployeeCreateView(LoginRequiredMixin, CreateView):
+    model = DeptEmployee
+    form_class = DeptEmployeeForm
+
+class DeptEmployeeDetailView(LoginRequiredMixin, DetailView):
+    model = DeptEmployee
+
+class DeptEmployeeUpdateView(LoginRequiredMixin, UpdateView):
+    model = DeptEmployee
+    form_class = DeptEmployeeForm
+
+class DeptEmployeeDeleteView(LoginRequiredMixin, DeleteView):
+    model = DeptEmployee
+    success_url = reverse_lazy('management: deptemployee_list')
+
+class DeptEmployeeListView(LoginRequiredMixin, ListView):
+    model = DeptEmployee
+
+
+##############################################################################
+#Employee views
 class EmployeeCreateView(LoginRequiredMixin, CreateView):
     model = Employee
     form_class = EmployeeForm

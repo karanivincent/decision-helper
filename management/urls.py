@@ -29,5 +29,17 @@ urlpatterns = [
     path('titles/update/<int:pk>/', views.TitlesUpdateView.as_view(), name='titles_update'),
     path('titles/delete/<int:pk>/', views.TitlesDeleteView.as_view(), name='titles_delete'),
     ##########################################################################################################
+    path('deptmanager/', views.DeptManagerListView.as_view(), name='dept_manager_list'),
+    path('deptmanager/new/', views.DeptManagerCreateView.as_view(), name='dept_manager_new'),
+    path('deptmanager/detail/<int:pk>/', views.DeptManagerDetailView.as_view(), name='dept_manager_detail'),
+    path('deptmanager/update/<int:pk>/', views.DeptManagerUpdateView.as_view(), name='dept_manager_update'),
+    path('deptmanager/delete/<int:pk>/', views.DeptManagerDeleteView.as_view(), name='dept_manager_delete'),
+    ##########################################################################################################
+    path('deptemployee/', views.DeptEmployeeListView.as_view(), name='dept_employee_list'),
+    path('deptemployee/new/', views.DeptEmployeeCreateView.as_view(), name='dept_employee_new'),
+    path('deptemployee/detail/<int:pk>/', views.DeptEmployeeDetailView.as_view(), name='dept_employee_detail'),
+    path('deptemployee/update/<int:pk>/', views.DeptEmployeeUpdateView.as_view(), name='dept_employee_update'),
+    path('deptemployee/delete/<int:pk>/', views.DeptEmployeeDeleteView.as_view(), name='dept_employee_delete'),
+    ##########################################################################################################
     
 ]
