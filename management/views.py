@@ -1,14 +1,21 @@
 from django.shortcuts import render
-from management.models import (Departments, Employee)
+from management.models import (Departments, Employee,
+                                Salaries, Titles,
+                                DeptEmployee, DeptManager)
 from django.views.generic import (CreateView, DetailView,
-                                 UpdateView, DeleteView,
-                                  ListView )
+                                    UpdateView, DeleteView,
+                                    ListView )
 from django.contrib.auth.mixins import LoginRequiredMixin
-from management.forms import DepartmentsForm, EmployeeForm
+from management.forms import (DepartmentsForm, EmployeeForm,
+                                SalariesForm, TitlesForm,
+                                DeptEmployeeForm, DeptManagerForm)
 from django.urls import reverse_lazy
 
 
 # Create your views here.
+###################################################################################
+
+#Department Views
 
 class DepartmentsCreateView(LoginRequiredMixin, CreateView):
     model = Departments
@@ -33,8 +40,50 @@ class DepartmentsDeleteView(LoginRequiredMixin, DeleteView):
 class DepartmentsListView(ListView):
     model = Departments
 
-##############################################################################
+#DeptManager views 
 
+class DeptManagerCreateView(LoginRequiredMixin, CreateView):
+    model = DeptManager
+    form_class = DeptManagerForm
+
+class DeptManagerDetailView(LoginRequiredMixin, DetailView):
+    model = DeptManager
+
+class DeptManagerUpdateView(LoginRequiredMixin, UpdateView):
+    model = DeptManager
+    form_class = DeptManagerForm
+    template_name_suffix = '_update_form'
+
+class DeptManagerDeleteView(LoginRequiredMixin, DeleteView):
+    model = DeptManager
+    success_url = reverse_lazy('management: deptmanager_list')
+
+class DeptManagerListView(LoginRequiredMixin, ListView):
+    model = DeptManager
+
+#DeptEmployee views
+
+class DeptEmployeeCreateView(LoginRequiredMixin, CreateView):
+    model = DeptEmployee
+    form_class = DeptEmployeeForm
+
+class DeptEmployeeDetailView(LoginRequiredMixin, DetailView):
+    model = DeptEmployee
+
+class DeptEmployeeUpdateView(LoginRequiredMixin, UpdateView):
+    model = DeptEmployee
+    form_class = DeptEmployeeForm
+
+class DeptEmployeeDeleteView(LoginRequiredMixin, DeleteView):
+    model = DeptEmployee
+    success_url = reverse_lazy('management: deptemployee_list')
+
+class DeptEmployeeListView(LoginRequiredMixin, ListView):
+    model = DeptEmployee
+
+
+##############################################################################
+#Employee views
 class EmployeeCreateView(LoginRequiredMixin, CreateView):
     model = Employee
     form_class = EmployeeForm
@@ -56,3 +105,43 @@ class EmployeeListView(LoginRequiredMixin, ListView):
     model = Employee
 
 #######################################################################################
+
+class SalariesCreateView(LoginRequiredMixin, CreateView):
+    model = Salaries
+    form_class = SalariesForm
+
+class SalariesDetailView(LoginRequiredMixin, DetailView):
+    model = Salaries
+
+class SalariesUpdateView(LoginRequiredMixin, UpdateView):
+    model = Salaries
+    form_class = SalariesForm
+    template_name_suffix = '_update_form'
+
+class SalariesDeleteView(LoginRequiredMixin, DeleteView):
+    model = Salaries
+    success_url = reverse_lazy('management:salaries_list')
+
+class SalariesListView(LoginRequiredMixin, ListView):
+    model = Salaries
+
+##########################################################################################
+
+class TitlesCreateView(LoginRequiredMixin, CreateView):
+    model = Titles
+    form_class = TitlesForm
+
+class TitlesDetailView(LoginRequiredMixin, DetailView):
+    model = Titles
+
+class TitlesUpdateView(LoginRequiredMixin, UpdateView):
+    model = Titles
+    form_class = TitlesForm
+    template_name_suffix = '_update_form'
+
+class TitlesDeleteView(LoginRequiredMixin, DeleteView):
+    model = Titles
+    success_url = reverse_lazy('management:titles_list')
+
+class TitlesListView(LoginRequiredMixin, ListView):
+    model = Titles
