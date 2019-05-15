@@ -5,6 +5,14 @@
 <p> Gender : {{employee.gender}}</p>
 <p> DOB: {{employee.birth_date}} </p>
 <p> Hired on: {{employee.hire_date}} </p>
+<p> Title: 
+  {% for title in employee.title.all %}
+
+   {{title.title}},
+  
+  {% endfor %}
+</p>
+
 
 {% if user.is_authenticated %}
   <a class='btn btn-secondary' href="{% url 'management:employee_update' pk=employee.pk %}">
